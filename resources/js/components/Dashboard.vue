@@ -1,5 +1,4 @@
 <template>
-  <div>
       <h1>Welcome {{Username}}, <a @click="logout">Logout</a></h1> 
       <div class="table-responsive" style="font-size: 16px;">
           <table class="table align-items-center">
@@ -17,28 +16,27 @@
               </tbody>
           </table>
       </div>
-  </div>
 </template>
 
 <script>
+import { onMounted, computed } from 'vue'
+import { useStore } from 'vuex'
 export default {
-  computed:{
-    Username(){
-      return this.$store.getters.user.name
+  setup() {
+    const store = useStore()
+    const Username = computed(() => {
+      return store.getters.user.name
+    });
+    const subjects = computed(() => {
+      return store.getters.subjects
+    });
+    function logout() {
+      store.dispatch("logout")
     }
-  },
-  mounted(){
-    this.$store.dispatch("subjects")
-  },
-  computed:{
-    subjects(){
-      return this.$store.getters.subjects
-    }
-  },
-  methods:{
-    logout(){
-      this.$store.dispatch("logout")
-    }
+    onMounted(() => {
+      store.dispatch("subjects")
+    })
+    return { logout, subjects, Username };
   }
 }
 </script>

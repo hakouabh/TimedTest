@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="row align-items-center justify-content-center">
       <div class="col-xl-6 col-lg-6 col-md-6">
         <div class="row">
@@ -19,24 +18,23 @@
       </div>
     </div>
 	</div>
-  </div>
 </template>
 
 <script>
+import { reactive } from "vue";
+import { useStore } from 'vuex'
 export default {
-data (){
-    return {
-      errors:{},
-      form:{
+  setup() {
+    const store = useStore()
+    const errors = reactive({});
+    const form = reactive({
         email: null,
         password: null
-      }
+    });
+    function login() {
+      store.dispatch("login", this.form)
     }
-  },
-  methods:{
-    login(){
-      this.$store.dispatch("login", this.form)
-    }
+    return { errors, form, login };
   }
 }
 </script>

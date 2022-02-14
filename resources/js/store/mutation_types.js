@@ -39,7 +39,7 @@ const mutations = {
     loginUserSuccess(state, data) {
         localStorage.setItem('access_token', data.access_token);
         localStorage.setItem('user', data.user);
-        router.push('/dashboard');
+        router.push('/');
         return state.user = data.user
     }
 }

@@ -1,8 +1,8 @@
 require('./bootstrap');
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from 'Components/App.vue'
 import router from './router'
-import { store } from 'Store/store'
+import { store } from 'Store/store.js'
 
 router.beforeEach((to, from, next) => {
 	let token = localStorage.getItem('access_token')
@@ -29,10 +29,7 @@ router.beforeEach((to, from, next) => {
 		next() 
 	}
 })
-new Vue({
-  el: '#app',
-  router,
-  store,
-  components: { App },
-  template: '<App/>'
-})
+createApp(App)
+.use(store)
+.use(router)
+.mount('#app')

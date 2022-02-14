@@ -1,12 +1,9 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from 'Components/Dashboard.vue'
 import Login from 'Components/Login.vue'
-Vue.use(Router)
 
-export default new Router({
+const router =  createRouter({
   routes: [
-    { path: "*", redirect: '/',},
     {
       path:'/',
       component: Dashboard,
@@ -24,6 +21,7 @@ export default new Router({
       name:'Login'
     }
   ],
-    mode:'history'
+    history: createWebHistory()
 },
-  )
+)
+export default router;
